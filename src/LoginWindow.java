@@ -16,12 +16,12 @@ public class LoginWindow {
 
     
 
-    public LoginWindow() {
+    public LoginWindow(Server s1, Server s2, Server s3) {
 
 
-        Server s1 = new Server("WIPIE 1");
-        Server s2 = new Server("WIPIE 2");
-        Server s3 = new Server("WIPIE 3");
+        this.s1 = s1;
+        this.s2 = s2;
+        this.s3 = s3;
 
         frame = new JFrame("Login");
         
