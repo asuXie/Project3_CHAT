@@ -6,6 +6,7 @@ public class Client {
     public Client(Server server, String nick) {
         this.server = server;
         this.nick = nick;
+        ChatWindow cw = new ChatWindow(this, server);
     }
 
     public Client(Server server) {
@@ -16,5 +17,9 @@ public class Client {
         Com com = new Com(nick, comunicate);
         server.recieveCom(com);
     } 
+
+    public Server getServer() {
+        return server;
+    }
     
 }
