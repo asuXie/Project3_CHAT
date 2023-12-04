@@ -103,36 +103,22 @@ public class ChatWindow {
         
         new Thread() {
             public void run() {
-                int comsSize;
-                int beforeSize = 0;
                 while(true) {
                     
-                    comsSize = coms.size();
-                    if (comsSize != beforeSize) {
-                        System.out.println("Zmiana");
-                        beforeSize = comsSize;
                     
-                        try {
-                            if (comsSize != coms.size()){
-
-                            
-
-                            Thread.sleep(100);
-                            p2.removeAll();
-                            coms = clientServer.getComs();
-                            for (Com com : coms) {
-                                p2.setVisible(false);
-                                p2.add(new JLabel(com.toString()));
-                                p2.setVisible(true);
-                                
-                            }
-                            
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                    try {
+                        
+                        Thread.sleep(100);
+                        p2.removeAll();
+                        coms = clientServer.getComs();
+                        for (Com com : coms) {
+                            p2.setVisible(false);
+                            p2.add(new JLabel(com.toString()));
+                            p2.setVisible(true);
                         }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    
                     
                 }
             }
