@@ -19,6 +19,7 @@ public class ChatWindow {
 
     private Client client;
     private Server clientServer;
+    private ArrayList<Com> coms;
 
 
     public ChatWindow(Client client, Server clientServer) {
@@ -32,6 +33,7 @@ public class ChatWindow {
         frame = new JFrame("Chat");
         frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
         frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
 
 
@@ -65,7 +67,7 @@ public class ChatWindow {
 
             String text = textField.getText();
 
-            ArrayList<Com> coms = clientServer.getComs();
+            coms = clientServer.getComs();
 
 
             client.send(text);
@@ -76,33 +78,70 @@ public class ChatWindow {
                 p2.add(new JLabel(com.toString()));
                 p2.setVisible(true);
             }
+            textField.setText("");
 
             
             
             
         });
-               
-           
 
-            
-
-
-            
-           
-
-            
-            
-            
-            
-           
-            
-       
-
-
+        
+        
+        
+   
         frame.add(button);
+        frame.setVisible(true);
+        refresh();
         
 
-        frame.setVisible(true);
+       
+        
     
     }
+
+    private void refresh() {
+        
+        new Thread() {
+            public void run() {
+                int comsSize;
+                int beforeSize = 0;
+                while(true) {
+                    
+                    comsSize = coms.size();
+                    if (comsSize != beforeSize) {
+                        System.out.println("Zmiana");
+                        beforeSize = comsSize;
+                    
+                        try {
+                            if (comsSize != coms.size()){
+
+                            
+
+                            Thread.sleep(100);
+                            p2.removeAll();
+                            coms = clientServer.getComs();
+                            for (Com com : coms) {
+                                p2.setVisible(false);
+                                p2.add(new JLabel(com.toString()));
+                                p2.setVisible(true);
+                                
+                            }
+                            
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    
+                    
+                }
+            }
+        }.start();
+    }
+
+        
+        
+
+    
+    
 }

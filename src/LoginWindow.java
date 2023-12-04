@@ -88,18 +88,7 @@ public class LoginWindow {
                 }
         });
         panel.add(login);
-
-        
-
-
-        
-        
-        
-        
         frame.add(panel);
-
-        
-
         panel.setVisible(true);
         frame.setVisible(true);
 
